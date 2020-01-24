@@ -1,10 +1,20 @@
+//test comment
 node('master') {
-    // Init stage - get source code from Github
-    stage('Init')  {
-        git branch: 'master', changelog: true, url: 'https://github.com/sanusatyadarshi/nmit.git'
+    stage('Git Clone') {
+        git branch: 'master', changelog: true, credentialsId: 'sanu-bitbucket-credentials', url: 'https://github.com/sanusatyadarshi/nmit.git'
+        sh "ls"
     }
-    stage('Deploy to Nginx') {
-        sh "pwd"
-        sh "cd nmit"
+
+    stage('Project Name') {
+        def projects = readJSON file: "${env.WORKSPACE}/input.json"
+
+        echo "current workspace is ${env.WORKSPACE}"
+        echo "Project name is ${projects.projects.project[0].name}"
     }
+    
+    stage('RUN Python Script') {
+        sh "chmod 777 hello-nmit.py"
+        sh "./hello-nmit.py"
+    }
+
 }
