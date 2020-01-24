@@ -1,0 +1,15 @@
+Download git
+
+open git bash
+
+RUN ssh-keygen
+
+GO TO /c/Users/YOURUSERNAME/.ssh/id_rsa.pub
+
+open the file in any editor and copy the entire line
+
+GO TO https://github.com/settings/keys -->> Add new keys
+
+PASTE the key that you copied from id_rsa.pub here
+
+save and exit.
